@@ -7,8 +7,15 @@ import "dotenv/config";
 import routes from "./routes.js";
 import { authMiddleware } from "./middlewares/auth-middleware.js";
 import { tempData } from "./middlewares/temp-data-middleware.js";
+import sequelize from "./config/database.js";
 
 const app = express();
+// Database config
+// Add this to sync Sequelize models after the app is initialized
+sequelize
+  .sync({ force: false }) // Set to `true` to drop and recreate tables every time
+  .then(() => console.log("✅ Sequelize models synced"))
+  .catch((err) => console.error("❌ Error syncing Sequelize models:", err));
 
 // Handlebars configuration
 app.engine(
