@@ -5,22 +5,16 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ivailopapazov/movie-magic-jan-2025.git"
+    "dev": "nodemon src/index.js",
+    "buildStyles": "npx tailwindcss -i ./src/public/css/style.css -o ./src/public/css/output.css --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
-  "bugs": {
-    "url": "https://github.com/ivailopapazov/movie-magic-jan-2025/issues"
-  },
-  "homepage": "https://github.com/ivailopapazov/movie-magic-jan-2025#readme",
   "devDependencies": {
-    "nodemon": "^3.1.9"
+    "nodemon": "^3.1.9",
+    "tailwindcss": "^3.4.17"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
