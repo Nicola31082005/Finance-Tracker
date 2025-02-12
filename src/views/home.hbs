@@ -1,0 +1,8 @@
+ <h1>Welcome to Finance Tracker</h1>
+    <p>Track your expenses, manage your income, and take control of your finances!</p>
+
+    {{#if user}}
+        <a href="/dashboard" class="btn">Go to Dashboard</a>
+    {{else}}
+        <a href="/register" class="btn">Get Started</a>
+    {{/if}}
