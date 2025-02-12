@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/about", (req, res) => {
-  res.render("about", { pageTitle: "About" });
+  res.render("about", { pageTitle: "About", layout: false });
 });
 
 export default router;
