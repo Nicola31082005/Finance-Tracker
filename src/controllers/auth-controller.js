@@ -6,6 +6,11 @@ import { getErrorMessage } from "../utils/error-utils.js";
 const authController = Router();
 
 authController.get("/register", (req, res) => {
+  if (req.user) {
+    res.setError("Already Authenticated");
+    res.redirect("/");
+  }
+
   res.render("auth/register");
 });
 
@@ -23,6 +28,11 @@ authController.post("/register", async (req, res) => {
 });
 
 authController.get("/login", (req, res) => {
+  if (req.user) {
+    res.setError("Already Authenticated");
+    res.redirect("/");
+  }
+
   res.render("auth/login");
 });
 

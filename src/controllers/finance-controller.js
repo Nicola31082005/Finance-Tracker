@@ -1,11 +1,10 @@
 import { Router } from "express";
 import financeService from "../services/finance-service.js";
-import Transaction from "../models/Transaction.js";
+import { isAuth } from "../middlewares/auth-middleware.js";
 
 const financeController = Router();
-
 // View all transactions
-financeController.get("/finance", async (req, res) => {
+financeController.get("/finance", isAuth, async (req, res) => {
   try {
     const transactions = await financeService.getAll();
     res.render("finance/transactionView", { transactions });
@@ -15,7 +14,7 @@ financeController.get("/finance", async (req, res) => {
   }
 });
 
-financeController.post("/finance", async (req, res) => {
+financeController.post("/finance", isAuth, async (req, res) => {
   const transactionData = req.body;
   try {
     // create a transaction
