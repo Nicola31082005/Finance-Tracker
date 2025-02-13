@@ -7,8 +7,10 @@ const financeController = Router();
 // View all transactions
 financeController.get("/finance", isAuth, async (req, res) => {
   try {
-    const transactions = await financeService.getAll();
-    const availableMoney = await financeService.calculateRemainingMoney();
+    const transactions = await financeService.getAll(req.user.id);
+    const availableMoney = await financeService.calculateRemainingMoney(
+      req.user.id
+    );
     res.render("finance/transactionView", { transactions, availableMoney });
   } catch (error) {
     console.error("Error fetching transactions:", error);
@@ -39,7 +41,7 @@ financeController.post("/finance/delete/:id", isAuth, async (req, res) => {
   const transactionId = req.params.id;
 
   try {
-    await financeService.delete(transactionId);
+    await financeService.delete(transactionId, req.user.id);
     res.redirect("/finance");
   } catch (error) {
     const errorMessage = getErrorMessage(error);

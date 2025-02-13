@@ -1,24 +1,24 @@
 import Transaction from "../models/Transaction.js";
 
 export default {
-  async getAll() {
-    return Transaction.findAll({});
+  async getAll(userId, filter = {}) {
+    return Transaction.findAll({ where: { userId, ...filter } });
   },
   async create(data, userId) {
     return Transaction.create({ ...data, userId });
   },
-  delete(id) {
-    return Transaction.destroy({ where: { id } });
+  delete(id, userId) {
+    return Transaction.destroy({ where: { id, userId } });
   },
-  async calculateRemainingMoney() {
-    const incomes = await Transaction.findAll({ where: { type: "income" } });
-    const expenses = await Transaction.findAll({ where: { type: "expense" } });
+  async calculateRemainingMoney(userId) {
+    const incomes = await this.getAll(userId, { type: "income" });
+    const expenses = await this.getAll(userId, { type: "expense" });
 
-    const incomeMoney = Array.from(incomes).reduce(
+    const incomeMoney = incomes.reduce(
       (acc, transaction) => (acc += transaction.amount),
       0
     );
-    const expenseMoney = Array.from(expenses).reduce(
+    const expenseMoney = expenses.reduce(
       (acc, transaction) => (acc += transaction.amount),
       0
     );
