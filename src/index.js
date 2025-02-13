@@ -39,7 +39,7 @@ app.set("views", path.join(process.cwd(), "src", "views"));
 
 // Express configuration
 app.use(express.urlencoded({ extended: true })); // support encoded bodies
-app.use("/static", express.static("src/public"));
+app.use("/static", express.static(path.join(process.cwd(), "src", "public")));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(
