@@ -7,4 +7,7 @@ export default {
   async create(data) {
     return Transaction.create(data);
   },
+  delete(id) {
+    return Transaction.destroy({ where: { id } });
+  },
 };

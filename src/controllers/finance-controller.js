@@ -31,4 +31,17 @@ financeController.post("/finance", isAuth, async (req, res) => {
   }
 });
 
+financeController.post("/finance/delete/:id", isAuth, async (req, res) => {
+  const transactionId = req.params.id;
+
+  try {
+    await financeService.delete(transactionId);
+    res.redirect("/finance");
+  } catch (error) {
+    const errorMessage = getErrorMessage(error);
+    res.setError(errorMessage);
+    res.redirect("/finance");
+  }
+});
+
 export default financeController;
