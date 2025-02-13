@@ -8,6 +8,7 @@ import routes from "./routes.js";
 import { authMiddleware } from "./middlewares/auth-middleware.js";
 import { tempData } from "./middlewares/temp-data-middleware.js";
 import sequelize from "./config/database.js";
+import path from "path";
 
 const app = express();
 // Database config
@@ -28,7 +29,7 @@ app.engine(
   })
 );
 app.set("view engine", "hbs");
-app.set("views", "./src/views");
+app.set("views", path.join(process.cwd(), "src", "views"));
 
 // Express configuration
 app.use("/static", express.static("src/public"));

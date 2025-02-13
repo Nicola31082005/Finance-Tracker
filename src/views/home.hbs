@@ -3,11 +3,11 @@
         <p class="text-lg text-gray-700 mt-4">Track your expenses and manage your income efficiently.</p>
 
         {{#if user}}
-            <a href="/dashboard" class="mt-6 px-6 py-3 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600">
+            <a href="/finance" class="mt-6 px-6 py-3 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600">
                 Go to Dashboard
             </a>
         {{else}}
-            <a href="/register" class="mt-6 px-6 py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600">
+            <a href="/auth/register" class="mt-6 px-6 py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600">
                 Get Started
             </a>
         {{/if}}
