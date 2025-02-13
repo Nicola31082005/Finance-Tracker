@@ -44,8 +44,8 @@
   <!-- Transaction List -->
   <h2 class="text-3xl font-extrabold text-gray-800 mt-12 text-center animate__animated animate__fadeIn animate__delay-2s">Transaction History</h2>
 
-  <div class="bg-white shadow-lg rounded-lg p-6 mt-6">
     {{#each transactions}}
+    <div class="bg-white shadow-lg rounded-lg p-6 mt-6">
       <div class="relative flex justify-between items-center p-4 mb-4 border-b last:border-none transition-all duration-300 ease-in-out hover:bg-indigo-100 hover:shadow-xl transform hover:scale-105
                   {{#if (eq type 'income')}}
                     bg-green-100
@@ -86,6 +86,6 @@
           </form>
         </div>
       </div>
+    </div>
     {{/each}}
-  </div>
 </div>

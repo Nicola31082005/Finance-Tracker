@@ -1,6 +1,7 @@
 import { Router } from "express";
 import financeService from "../services/finance-service.js";
 import { isAuth } from "../middlewares/auth-middleware.js";
+import { getErrorMessage } from "../utils/error-utils.js";
 
 const financeController = Router();
 // View all transactions
@@ -24,8 +25,9 @@ financeController.post("/finance", isAuth, async (req, res) => {
 
     res.redirect("/finance");
   } catch (error) {
-    console.error(error);
-    res.end();
+    const errorMessage = getErrorMessage(error);
+    res.setError(errorMessage);
+    res.redirect("/finance");
   }
 });
 
