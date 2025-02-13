@@ -4,8 +4,8 @@ export default {
   async getAll() {
     return Transaction.findAll({});
   },
-  async create(data) {
-    return Transaction.create(data);
+  async create(data, userId) {
+    return Transaction.create({ ...data, userId });
   },
   delete(id) {
     return Transaction.destroy({ where: { id } });

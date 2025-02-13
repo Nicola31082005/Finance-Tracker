@@ -8,6 +8,11 @@ const Transaction = sequelize.define("Transaction", {
   category: { type: DataTypes.STRING, allowNull: false },
   description: { type: DataTypes.STRING, allowNull: true },
   date: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: { model: "Users", key: "id" },
+  },
 });
 
 export default Transaction;
