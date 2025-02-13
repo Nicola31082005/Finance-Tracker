@@ -1,5 +1,6 @@
 import { Router } from "express";
 import financeService from "../services/finance-service.js";
+import Transaction from "../models/Transaction.js";
 
 const financeController = Router();
 
@@ -11,6 +12,21 @@ financeController.get("/finance", async (req, res) => {
   } catch (error) {
     console.error("Error fetching transactions:", error);
     res.status(500).send("Server error");
+  }
+});
+
+financeController.post("/finance", async (req, res) => {
+  const transactionData = req.body;
+  try {
+    // create a transaction
+    console.log(transactionData);
+
+    const newTransaction = await financeService.create(transactionData);
+
+    res.redirect("/finance");
+  } catch (error) {
+    console.error(error);
+    res.end();
   }
 });
 

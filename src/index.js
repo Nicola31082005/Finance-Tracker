@@ -9,8 +9,10 @@ import { authMiddleware } from "./middlewares/auth-middleware.js";
 import { tempData } from "./middlewares/temp-data-middleware.js";
 import sequelize from "./config/database.js";
 import path from "path";
+import { eq } from "./helpers/equalHelper.js";
 
 const app = express();
+
 // Database config
 // Add this to sync Sequelize models after the app is initialized
 sequelize
@@ -26,12 +28,16 @@ app.engine(
     runtimeOptions: {
       allowProtoPropertiesByDefault: true,
     },
+    helpers: {
+      eq,
+    },
   })
 );
 app.set("view engine", "hbs");
 app.set("views", path.join(process.cwd(), "src", "views"));
 
 // Express configuration
+app.use(express.urlencoded({ extended: true })); // support encoded bodies
 app.use("/static", express.static("src/public"));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
