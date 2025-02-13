@@ -14,9 +14,8 @@ import { eq, gte } from "./helpers/equalHelper.js";
 const app = express();
 
 // Database config
-// Add this to sync Sequelize models after the app is initialized
 sequelize
-  .sync({ force: false }) // Set to `true` to drop and recreate tables every time
+  .sync({ force: false })
   .then(() => console.log("✅ Sequelize models synced"))
   .catch((err) => console.error("❌ Error syncing Sequelize models:", err));
 
@@ -38,7 +37,7 @@ app.set("view engine", "hbs");
 app.set("views", path.join(process.cwd(), "src", "views"));
 
 // Express configuration
-app.use(express.urlencoded({ extended: true })); // support encoded bodies
+app.use(express.urlencoded({ extended: true }));
 app.use("/static", express.static(path.join(process.cwd(), "src", "public")));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -53,6 +52,7 @@ app.use(
     },
   })
 );
+
 // Add custom middlewares
 app.use(tempData);
 app.use(authMiddleware);
@@ -60,7 +60,5 @@ app.use(authMiddleware);
 // Setup routes
 app.use(routes);
 
-// Start server **after** database is ready
-app.listen(5001, () =>
-  console.log("🚀 Server is listening on http://localhost:5001...")
-);
+// Export the Express app for Vercel
+export default app;
