@@ -9,7 +9,7 @@ import { authMiddleware } from "./middlewares/auth-middleware.js";
 import { tempData } from "./middlewares/temp-data-middleware.js";
 import sequelize from "./config/database.js";
 import path from "path";
-import { eq } from "./helpers/equalHelper.js";
+import { eq, gte } from "./helpers/equalHelper.js";
 
 const app = express();
 
@@ -30,6 +30,7 @@ app.engine(
     },
     helpers: {
       eq,
+      gte,
     },
   })
 );
