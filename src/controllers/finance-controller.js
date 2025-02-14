@@ -1,53 +1,53 @@
-import { Router } from "express";
-import financeService from "../services/finance-service.js";
-import { isAuth } from "../middlewares/auth-middleware.js";
-import { getErrorMessage } from "../utils/error-utils.js";
+// import { Router } from "express";
+// import financeService from "../services/finance-service.js";
+// import { isAuth } from "../middlewares/auth-middleware.js";
+// import { getErrorMessage } from "../utils/error-utils.js";
 
-const financeController = Router();
-// View all transactions
-financeController.get("/finance", isAuth, async (req, res) => {
-  try {
-    const transactions = await financeService.getAll(req.user.id);
-    const availableMoney = await financeService.calculateRemainingMoney(
-      req.user.id
-    );
-    res.render("finance/transactionView", { transactions, availableMoney });
-  } catch (error) {
-    console.error("Error fetching transactions:", error);
-    res.status(500).send("Server error");
-  }
-});
+// const financeController = Router();
+// // View all transactions
+// financeController.get("/finance", isAuth, async (req, res) => {
+//   try {
+//     const transactions = await financeService.getAll(req.user.id);
+//     const availableMoney = await financeService.calculateRemainingMoney(
+//       req.user.id
+//     );
+//     res.render("finance/transactionView", { transactions, availableMoney });
+//   } catch (error) {
+//     console.error("Error fetching transactions:", error);
+//     res.status(500).send("Server error");
+//   }
+// });
 
-financeController.post("/finance", isAuth, async (req, res) => {
-  const transactionData = req.body;
-  try {
-    // create a transaction
-    console.log(transactionData);
+// financeController.post("/finance", isAuth, async (req, res) => {
+//   const transactionData = req.body;
+//   try {
+//     // create a transaction
+//     console.log(transactionData);
 
-    const newTransaction = await financeService.create(
-      transactionData,
-      req.user.id
-    );
+//     const newTransaction = await financeService.create(
+//       transactionData,
+//       req.user.id
+//     );
 
-    res.redirect("/finance");
-  } catch (error) {
-    const errorMessage = getErrorMessage(error);
-    res.setError(errorMessage);
-    res.redirect("/finance");
-  }
-});
+//     res.redirect("/finance");
+//   } catch (error) {
+//     const errorMessage = getErrorMessage(error);
+//     res.setError(errorMessage);
+//     res.redirect("/finance");
+//   }
+// });
 
-financeController.post("/finance/delete/:id", isAuth, async (req, res) => {
-  const transactionId = req.params.id;
+// financeController.post("/finance/delete/:id", isAuth, async (req, res) => {
+//   const transactionId = req.params.id;
 
-  try {
-    await financeService.delete(transactionId, req.user.id);
-    res.redirect("/finance");
-  } catch (error) {
-    const errorMessage = getErrorMessage(error);
-    res.setError(errorMessage);
-    res.redirect("/finance");
-  }
-});
+//   try {
+//     await financeService.delete(transactionId, req.user.id);
+//     res.redirect("/finance");
+//   } catch (error) {
+//     const errorMessage = getErrorMessage(error);
+//     res.setError(errorMessage);
+//     res.redirect("/finance");
+//   }
+// });
 
-export default financeController;
+// export default financeController;
