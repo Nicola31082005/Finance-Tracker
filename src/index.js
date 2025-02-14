@@ -60,5 +60,4 @@ app.use(authMiddleware);
 // Setup routes
 app.use(routes);
 
-// Export the Express app for Vercel
-export default app;
+app.listen(3000, () => console.log("server is listening on port 3000"));
