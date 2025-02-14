@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "buildStyles": "npx tailwindcss -i ./src/public/css/style.css -o ./src/public/css/output.css --watch"
+    "build": "npx tailwindcss -i ./src/public/css/style.css -o ./src/public/css/output.css --watch",
+    "vercel-build": "npm run build"
   },
   "keywords": [],
   "author": "",
